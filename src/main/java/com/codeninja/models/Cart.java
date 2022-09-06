@@ -52,4 +52,6 @@ public class Cart extends AbstractEntity {
     }
 
 
+    public void setStatus(CartStatus canceled) {
+    }
 }

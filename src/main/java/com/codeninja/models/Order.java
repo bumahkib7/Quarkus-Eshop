@@ -45,6 +45,7 @@ public class Order extends AbstractEntity {
                  ZonedDateTime shipped, Payment payment, Address
                          shipmentAddress,
                  Set<OrderItem> orderItems, Cart cart) {
+        super();
         this.price = price;
         this.status = status;
         this.shipped = shipped;
@@ -73,4 +74,6 @@ public class Order extends AbstractEntity {
         return Objects.hash(price, status, shipped, payment,
                 shipmentAddress, cart);
     }
+
+
 }
