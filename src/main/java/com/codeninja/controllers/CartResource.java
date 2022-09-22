@@ -7,9 +7,8 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import java.util.List;
 
-@Consumes("/")
-@Produces("/")
-@Path("/carts")
+
+@Path("api/v1/carts")
 public class CartResource {
     @Inject
     CartService cartService;

@@ -7,9 +7,8 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import java.util.List;
 
-@Consumes("/")
-@Produces("/")
-@Path("/customers")
+
+@Path("api/v1/customers")
 public class CustomerResource {
     @Inject
     CustomerService customerService;

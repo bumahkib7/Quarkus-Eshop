@@ -14,7 +14,6 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -55,10 +54,10 @@ public class PaymentService {
 
     public PaymentDto findById(Long id) {
         log.debug("Request to get Payment : {}", id);
-      Order order = findOrderByPaymentId(id);
-      if (order == null) {
-        throw new IllegalStateException("Order not found");
-      }
+        Order order = findOrderByPaymentId(id);
+        if (order == null) {
+            throw new IllegalStateException("Order not found");
+        }
         return this.paymentRepository.findById(id)
                 .map(payment -> mapToDto(payment, order.getId())).
                 orElse(null);

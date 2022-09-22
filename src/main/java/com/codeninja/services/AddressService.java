@@ -4,10 +4,11 @@ import com.codeninja.DTO.AddressDto;
 import com.codeninja.models.Address;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.validation.constraints.NotNull;
 
 @ApplicationScoped
 public class AddressService {
-    public static Address createFromDto(AddressDto addressDto) {
+    public static Address createFromDto(@NotNull AddressDto addressDto) {
         return new Address(
 
                 addressDto.getAddress1(),
@@ -18,7 +19,7 @@ public class AddressService {
         );
     }
 
-    public static AddressDto mapToDto(Address address) {
+    public static AddressDto mapToDto(@NotNull Address address) {
         return new AddressDto(
                 address.getAddress1(),
                 address.getAddress2(),

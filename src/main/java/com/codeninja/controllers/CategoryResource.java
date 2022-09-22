@@ -8,9 +8,8 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import java.util.List;
 
-@Consumes("/")
-@Produces("/")
-@Path("/categories")
+
+@Path("api/v1/categories")
 public class CategoryResource {
     @Inject
     CategoryService categoryService;

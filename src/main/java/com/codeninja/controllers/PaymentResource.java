@@ -7,9 +7,8 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import java.util.List;
 
-@Consumes("/")
-@Produces("/")
-@Path("/payments")
+
+@Path("api/v1/payments")
 public class PaymentResource {
     @Inject
     PaymentService paymentService;

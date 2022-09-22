@@ -5,6 +5,7 @@ import com.codeninja.models.Product;
 import com.codeninja.models.Review;
 import com.codeninja.repositories.ProductRepository;
 import com.codeninja.repositories.ReviewRepository;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -16,11 +17,17 @@ import java.util.stream.Collectors;
 @Slf4j
 @ApplicationScoped
 @Transactional
+@AllArgsConstructor(onConstructor = @__(@Inject))
+
 public class ReviewService {
     @Inject
     ReviewRepository reviewRepository;
     @Inject
     ProductRepository productRepository;
+
+
+
+
     public List<ReviewDto> findReviewsByProductId(Long id) {
         log.debug("Request to get all Reviews");
         return this.reviewRepository.findReviewsByProductId(id)

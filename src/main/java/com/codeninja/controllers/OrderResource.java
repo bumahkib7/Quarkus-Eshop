@@ -7,9 +7,8 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import java.util.List;
 
-@Consumes("/")
-@Produces("/")
-@Path("/orders")
+
+@Path("api/v1/orders")
 public class OrderResource {
     @Inject
     OrderService orderService;

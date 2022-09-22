@@ -7,9 +7,8 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import java.util.List;
 
-@Consumes("/")
-@Produces("/")
-@Path("/reviews")
+
+@Path("api/v1/reviews")
 public class ReviewResource {
     @Inject
     ReviewService reviewService;
