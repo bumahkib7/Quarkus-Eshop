@@ -11,11 +11,13 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
 
+@SuppressWarnings("ALL")
 @Slf4j
 @ApplicationScoped
 @Transactional
@@ -24,6 +26,15 @@ public class CartService {
     CartRepository cartRepository;
     @Inject
     CustomerRepository customerRepository;
+
+    public static CartDto mapToDto(Cart cart) {
+        return new CartDto(
+                cart.getId(),
+                CustomerService.mapToDto(cart.getCustomer()),
+                cart.getStatus().name()
+        );
+
+    }
 
     public List<CartDto> findAll() {
         log.debug("Request to get all Carts");
@@ -72,27 +83,31 @@ public class CartService {
     }
 
 
+
+
     public CartDto getActiveCart(Long customerId) {
         List<Cart> carts = this.cartRepository
                 .findByStatusAndCustomerId(CartStatus.NEW, customerId);
-        if (carts != null) {
+
+        carts.stream()
+                .filter(Objects::nonNull)
+                .findFirst()
+                .map(cart -> mapToDto(carts.get(1)))
+                .orElseThrow();
+
+        return null;
+
+        // first of all cart shouldn't be empty
+        //cart should only return 1 instance per user and not more
+        //
+
+        /*if (carts != null) {
             if (carts.size() == 1) {
                 return mapToDto(carts.get(0));
             }
             if (carts.size() > 1) {
                 throw new IllegalStateException("Many active carts detected !!!");
-            }
-        }
-        return null;
-    }
-
-    public static CartDto mapToDto(Cart cart) {
-        return new CartDto(
-        cart.getId(),
-        CustomerService.mapToDto(cart.getCustomer()),
-        cart.getStatus().name()
-        );
-
+            }*/
     }
 
 }

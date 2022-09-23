@@ -5,10 +5,12 @@ import com.codeninja.services.CustomerService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 
 @Path("api/v1/customers")
+@Produces(MediaType.APPLICATION_JSON)
 public class CustomerResource {
     @Inject
     CustomerService customerService;

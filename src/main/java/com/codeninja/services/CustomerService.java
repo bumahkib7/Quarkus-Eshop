@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("ALL")
 @Slf4j
 @ApplicationScoped
 @Transactional
@@ -19,6 +20,14 @@ public class CustomerService {
     @Inject
     CustomerRepository customerRepository;
 
+    public static CustomerDto mapToDto(Customer customer) {
+        return new CustomerDto(customer.getId(),
+                customer.getFirstName(),
+                customer.getLastName(),
+                customer.getEmail(),
+                customer.getTelephone()
+        );
+    }
 
     public CustomerDto create(CustomerDto customerDto) {
         log.debug("Request to create Customer : {}", customerDto);
@@ -70,17 +79,8 @@ public class CustomerService {
         Customer customer = this.customerRepository.findById(id)
                 .orElseThrow(() ->
                         new IllegalStateException("Cannot find Customer with id" + id));
-                                customer.setEnabled(false);
+        customer.setEnabled(false);
         this.customerRepository.save(customer);
-    }
-
-    public static CustomerDto mapToDto(Customer customer) {
-        return new CustomerDto(customer.getId(),
-                customer.getFirstName(),
-                customer.getLastName(),
-                customer.getEmail(),
-                customer.getTelephone()
-        );
     }
 }
 

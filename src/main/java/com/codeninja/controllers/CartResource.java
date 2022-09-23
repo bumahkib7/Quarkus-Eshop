@@ -5,6 +5,7 @@ import com.codeninja.services.CartService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 
@@ -14,12 +15,14 @@ public class CartResource {
     CartService cartService;
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public List<CartDto> findAll() {
         return this.cartService.findAll();
     }
 
     @GET
     @Path("/active")
+    @Produces(MediaType.APPLICATION_JSON)
     public List<CartDto> findAllActiveCarts() {
         return this.cartService.findAllActiveCarts();
     }

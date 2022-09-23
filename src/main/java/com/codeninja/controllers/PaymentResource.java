@@ -5,9 +5,11 @@ import com.codeninja.services.PaymentService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 
+@Consumes(MediaType.APPLICATION_JSON)
 @Path("api/v1/payments")
 public class PaymentResource {
     @Inject

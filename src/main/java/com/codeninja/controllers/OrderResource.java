@@ -9,6 +9,7 @@ import java.util.List;
 
 
 @Path("api/v1/orders")
+@Produces
 public class OrderResource {
     @Inject
     OrderService orderService;
@@ -27,6 +28,7 @@ public class OrderResource {
         return this.orderService.findById(id);
     }
     @POST
+    @Consumes
     public OrderDto create(OrderDto orderDto) {
         return this.orderService.create(orderDto);
     }

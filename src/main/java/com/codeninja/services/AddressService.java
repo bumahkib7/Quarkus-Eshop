@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @ApplicationScoped
 public class AddressService {
-    public static Address createFromDto(@NotNull AddressDto addressDto) {
+    public static Address createFromDto( AddressDto addressDto) {
         return new Address(
 
                 addressDto.getAddress1(),
