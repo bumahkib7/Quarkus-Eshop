@@ -29,6 +29,12 @@ public class ReviewService {
 
 
 
+    /**
+     * > This function returns a list of reviews for a given product id
+     *
+     * @param id The id of the product you want to find reviews for.
+     * @return A list of ReviewDto objects
+     */
     public List<ReviewDto> findReviewsByProductId(Long id) {
         log.debug("Request to get all Reviews");
         return this.reviewRepository.findReviewsByProductId(id)
@@ -37,6 +43,12 @@ public class ReviewService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * > Find a review by id, if it exists, map it to a DTO, otherwise return null
+     *
+     * @param id The id of the review to be retrieved.
+     * @return A ReviewDto object
+     */
     public ReviewDto findById(Long id) {
         log.debug("Request to get Review : {}", id);
         return this.reviewRepository
@@ -44,6 +56,14 @@ public class ReviewService {
                 .map(ReviewService::mapToDto)
                 .orElse(null);
     }
+
+    /**
+     * We are creating a new Review and saving it to the database
+     *
+     * @param reviewDto The ReviewDto object that we want to create.
+     * @param productId The ID of the product that the review is for.
+     * @return ReviewDto
+     */
     public ReviewDto create(ReviewDto reviewDto, Long productId) {
         log.debug("Request to create Review : {} ofr the Product {}",
                 reviewDto, productId);
@@ -60,6 +80,13 @@ public class ReviewService {
         this.productRepository.saveAndFlush(product);
         return mapToDto(savedReview);
     }
+
+    /**
+     * We find the review by its ID, then we find the product that the review belongs to, then we remove the review from
+     * the product's list of reviews, then we save the product, then we delete the review
+     *
+     * @param reviewId The ID of the review to be deleted.
+     */
     public void delete(Long reviewId) {
         log.debug("Request to delete Review : {}", reviewId);
         Review review = this.reviewRepository.findById(reviewId)
@@ -72,6 +99,8 @@ public class ReviewService {
         this.productRepository.saveAndFlush(product);
         this.reviewRepository.delete(review);
     }
+
+    // This is a static method that takes a Review object and maps it to a ReviewDto object.
     public static ReviewDto mapToDto(Review review) {
         return new ReviewDto(
                 review.getId(),
